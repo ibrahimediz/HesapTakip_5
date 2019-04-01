@@ -12,7 +12,7 @@ class ilkDB():
         cursor.execute("""INSERT INTO ARAYUZ_DENEME 
         (TEXT1,TEXT2) VALUES 
         ('{}','{}')""".format(text1,text2))
-        db.commit
+        db.commit()
 
 
         # print(text1,text2)
