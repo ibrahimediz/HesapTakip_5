@@ -2,7 +2,7 @@ from DB import VeriTabani
 import sqlite3 as sql
 class ilkDB():
     def __init__(self):
-        self.adres = r"D:\İbrahim EDİZ\HesapTakip_5\IEDB.db"
+        self.adres = r"IEDB.db"
 
         
 

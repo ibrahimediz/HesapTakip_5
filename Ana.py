@@ -9,7 +9,7 @@ class Ana(QMainWindow):
         self.veriTaban = ilkDB()
         self.secilenAy = ""
         self.secilenKalem = ""
-        self.win = uic.loadUi(r"D:\İbrahim EDİZ\HesapTakip_5\Ana.ui")
+        self.win = uic.loadUi(r"Ana.ui")
 
         self.win.cmbAy.currentIndexChanged.connect(self.cmbAyClick)
         self.win.cmbKalem.currentIndexChanged.connect(self.cmbKalemClick)
@@ -21,7 +21,7 @@ class Ana(QMainWindow):
         for a,b in self.veriTaban.sozlukGetir(2):
             self.win.cmbAy.addItem(b,a)
         
-    
+
     def btKaydeyClick(self):
         tutar =  self.win.txtTutar.text()
         self.veriTaban.VeriEkle(self.secilenKalem,self.secilenAy,tutar)
