@@ -7,21 +7,38 @@ class ilkDB():
         
 
     def VeriEkle(self,kalem,ay,tutar):
-        import sqlite3
-        db = sqlite3.connect(self.adres)
-        cursor = db.cursor()
-        cursor.execute("""
-                INSERT INTO HSP_BILGI (HSP_KALEM,HSP_TUTAR,HSP_AY)
-                VALUES (
-                {},
-                {},
-                {}
-                )
-                """.format(kalem,tutar,ay)
-         )
-        db.commit()
+        try:
+            import sqlite3
+            db = sqlite3.connect(self.adres)
+            cursor = db.cursor()
+            cursor.execute("""
+                    INSERT INTO HSP_BILGI (HSP_KALEM,HSP_TUTAR,HSP_AY)
+                    VALUES (
+                    {},
+                    {},
+                    {}
+                    )
+                    """.format(kalem,tutar,ay)
+            )
+            db.commit()
+            return 1
+        except:
+            return 0
+        finally:
+            db.close()
 
-    
+
+    # select * from v_hesap 
+    def listeGetir(self,ay="Seçiniz"):
+        db = sql.connect(self.adres)
+        cursor = db.cursor()
+        sorgu = """
+        select * from v_hesap """
+        if ay != "Seçiniz":
+                sorgu += " where  AY = '" + ay + "'"
+        cursor.execute(sorgu)
+        return cursor.fetchall()
+
 
     def sozlukGetir(self,tabloid):
         db = sql.connect(self.adres)
