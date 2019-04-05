@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QLineEdit,QMainWindow,QTableWidget,QTableWidgetItem,QMessageBox
 from PyQt5.QtCore import pyqtSlot
