@@ -25,6 +25,15 @@ class Ana(QMainWindow):
             self.win.cmbAy.addItem(b,a)
         self.listeDoldur()
         self.win.listDinamik.itemDoubleClicked.connect(self.tikla)
+        
+        self.win.btYeni.clicked.connect(self.Temizle)
+        self.win.btTemizle.clicked.connect(self.Temizle)
+        
+    def Temizle(self):
+        self.win.cmbAy.setCurrentText("Seçiniz")
+        self.win.cmbKalem.setCurrentText("Seçiniz")
+        self.win.txtTutar.setText("")
+        self.win.lblKayit.setText("")
             
     def tikla(self):
         print(self.liste[self.win.listDinamik.currentRow()])
@@ -36,8 +45,15 @@ class Ana(QMainWindow):
         self.win.cmbAy.setCurrentText(self.liste[self.win.listDinamik.currentRow()][3])   
 
     def btKaydeyClick(self):
-        tutar =  self.win.txtTutar.text()
-        sonuc = self.veriTaban.VeriEkle(self.secilenKalem,self.secilenAy,tutar)
+        if self.win.lblKayit.text() == "": 
+            tutar =  self.win.txtTutar.text()
+            sonuc = self.veriTaban.VeriEkle(self.secilenKalem,self.secilenAy,tutar)
+        else:
+            ID = self.win.lblKayit.text()
+            tutar =  self.win.txtTutar.text()
+            sonuc = self.veriTaban.VeriGuncelle(self.secilenKalem,self.secilenAy,tutar,ID)
+        
+
         if sonuc == 1:
             QMessageBox.information(self,"Sonuç","Kaydedildi")
             self.listeDoldur()

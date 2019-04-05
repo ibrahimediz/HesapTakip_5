@@ -27,6 +27,27 @@ class ilkDB():
         finally:
             db.close()
 
+    def VeriGuncelle(self,kalem,ay,tutar,ID):
+        try:
+            import sqlite3
+            db = sqlite3.connect(self.adres)
+            cursor = db.cursor()
+            cursor.execute("""
+                    UPDATE HSP_BILGI SET 
+                    HSP_KALEM = {0},
+                    HSP_AY = {2},
+                    HSP_TUTAR = {1}
+                    WHERE 
+                    ID = {3}
+                    """.format(kalem,tutar,ay,ID)
+            )
+            db.commit()
+            return 1
+        except:
+            return 0
+        finally:
+            db.close()
+
 
     # select * from v_hesap 
     def listeGetir(self,ay="Seçiniz"):
