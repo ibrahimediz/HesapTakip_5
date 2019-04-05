@@ -48,6 +48,22 @@ class ilkDB():
         finally:
             db.close()
 
+    def VeriSil(self,ID):
+        try:
+            import sqlite3
+            db = sqlite3.connect(self.adres)
+            cursor = db.cursor()
+            cursor.execute("""
+                    DELETE FROM HSP_BILGI WHERE 
+                    ID = {0}
+                    """.format(ID)
+            )
+            db.commit()
+            return 1
+        except:
+            return 0
+        finally:
+            db.close()
 
     # select * from v_hesap 
     def listeGetir(self,ay="Seçiniz"):

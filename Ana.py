@@ -1,5 +1,6 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QLineEdit,QMainWindow,QTableWidget,QTableWidgetItem,QMessageBox
+from PyQt5.QtWidgets import *
 from PyQt5.QtCore import pyqtSlot
 from PyQt5 import uic,QtGui,QtCore
 from ilkDB import ilkDB
@@ -28,6 +29,7 @@ class Ana(QMainWindow):
         
         self.win.btYeni.clicked.connect(self.Temizle)
         self.win.btTemizle.clicked.connect(self.Temizle)
+        self.win.btSil.clicked.connect(self.Sil)
         
     def Temizle(self):
         self.win.cmbAy.setCurrentText("Seçiniz")
@@ -57,7 +59,17 @@ class Ana(QMainWindow):
         if sonuc == 1:
             QMessageBox.information(self,"Sonuç","Kaydedildi")
             self.listeDoldur()
-        
+    
+
+    def Sil(self):
+        if not self.win.lblKayit.text() == "": 
+           ID = self.win.lblKayit.text()
+           ElCevap = QMessageBox.question(self,"Soru","Silmek İstiyor musunuz?",QMessageBox.Yes | QMessageBox.No,QMessageBox.No )
+           if ElCevap == QMessageBox.Yes:
+               sonuc = self.veriTaban.VeriSil(ID)
+               if sonuc == 1:
+                QMessageBox.information(self,"Sonuç","Silindi")
+                self.listeDoldur()
 
     def listeDoldur(self):
         satir = 0
